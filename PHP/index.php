@@ -11,4 +11,5 @@ require_once("src/controller/login.php");
 
  $htmlBody = $lgc -> displayLogin();
 
+$view->echoHTML($htmlBody);
 ?>
