@@ -7,17 +7,15 @@ private $loginModel;
 
 	public function showLoginView (){
 	
-		$htmlBody = '<form action="" method="POST" >
-<h1>Login - Skriv in användarnamn och lösenord</h1>
-<p>
+		$htmlBody = '<h1>Laboration login del 1</h1><h2>Ej Inloggad</h2><form action="" method="POST" >
+		<fieldset>
+<legend>Login - Skriv in användarnamn och lösenord</legend>
 <label>Användarnamn : </label> <input type="text" name="name" maxlength="10"/>
-<label>lösenord : </label><input type="password" name="password" maxlength="10"/>
-<label>Håll mig inloggad</label><input type="checkbox" name="Auto"/>
-<br/>
-<br/>
-</p>
-<input type="submit" name="submit" value="logga in"/> 
-</form>';
+<label>Lösenord : </label><input type="password" name="password" maxlength="10"/>
+<label>Håll mig inloggad : </label><input type="checkbox" name="Auto"/>
+<input type="submit" name="submit" value="Logga in"/> 
+</fieldset>
+</form>' ;
 
     return $htmlBody;
 	}
@@ -76,7 +74,5 @@ public function getUsrName(){
 
 
 }
-
-
 
 ?>

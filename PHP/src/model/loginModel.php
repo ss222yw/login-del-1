@@ -42,7 +42,7 @@ public function checkInput($user, $pass){
 //var_dump($user);
 	if ($user  == $this -> username && $pass == $this -> password) {
 		# code...
-		echo "hej";
+		//echo "string";
 
 		return true;
 	}

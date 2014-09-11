@@ -19,10 +19,10 @@ class msg{
  }
 
  public function didUsrPressLogout(){
- 	if (isset($_GET['logout'])) {
+ 	//if (isset($_GET['logout'])) {
  		# code...
- 		return true;
- 	}
- 	return false;
+ 	//	return true;
+ 	//}
+ 	//return false;
  }
 }	
