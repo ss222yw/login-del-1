@@ -6,40 +6,48 @@ class loginModel {
 private $username;
 private $password;
 
+
 public function __construct(){
+	//$this -> getUsrInfo();
 
 }
 
-public function getUsr(){
-
-	$this -> username = "Admin";
+public function getUsrInfo(){
 
 
-	//$lines = file("config.txt");
+	$lines = "config.txt";
 
 
-	//$fp = fopen($lines, "a+");
-
-	//$username = substr($username, 0,4);
-	//fwrite($fp, $username . "\n");
+	$fp = fopen($lines, "r");
 
 
+	$fr = fread($fp, 13);
 
-}
+	$this -> username = substr($fr, 0,5);
 
-public function getPass(){
-/
-$this -> password = "Password";
-	//$textFile = file("config.php");
+	$this -> password = substr($fr, 5);
 
-	//$fo = fopen($textFile, "a+");
+	//var_dump($this -> username);
+	//var_dump($this -> password);
 
-	//$password = substr($password, 4);
-	//fwrite($fo, $password . "\n");
+
 
 
 }
 
+
+public function checkInput($user, $pass){
+
+//var_dump($pass);
+//var_dump($user);
+	if ($user  == $this -> username && $pass == $this -> password) {
+		# code...
+		echo "hej";
+
+		return true;
+	}
+	return false;
+}
 	
 }
 
