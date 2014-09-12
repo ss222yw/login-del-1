@@ -2,11 +2,11 @@
 
 class session{
 
-private $user;
+//private $user;
 
-	public function __construct(){
-		session_start();
-	}
+	//public function __construct(){
+	//	session_start();
+	//}
 
 	public function login(){
 
@@ -19,15 +19,15 @@ private $user;
 
 	}
 
-	public function isUserLoggedin(){
-		if (isset($_SESSION['name'])) {
+	//public function isUserLoggedin(){
+	//	if (isset($_SESSION['name'])) {
 			# code...
 
-			return true;
-		}
-		return false;
+			//return true;
+	//	}
+		//return false;
 
-	}
+//	}
 }
 
 

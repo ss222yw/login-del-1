@@ -7,7 +7,7 @@ class msg{
  
 
  public function showLoginMsg(){
- 		$msgLogin = "Admin är inloggad
+ 		$msgLogin = "<strong>Admin är inloggad</strong>
  				 <a href='?logout'>logga ut</a>";
  
  return $msgLogin;	

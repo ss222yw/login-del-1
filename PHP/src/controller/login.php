@@ -11,15 +11,16 @@ class loginControll{
 
 	private $loginView;
 	private $loginModel;
-	
+	private $msg;
 
 
 	public function __construct(){
 		$this -> loginModel = new loginModel();
 		$this -> loginView = new loginView($this -> loginModel);
 		$this -> msg = new msg($this -> loginModel);
+		$this -> showLoginMsg();
 		
-
+		//var_dump($this -> showLoginMsg());
 
 
 	}
@@ -36,52 +37,44 @@ class loginControll{
 	}
 
 
-	public function IsUsrLoggedIn(){
+	public function getUsrAndPass(){
 		
+		$pass = $this -> loginView -> getPassword();
+		$user = $this -> loginView -> getUsrName();
+
+		//var_dump($user);
+		//var_dump($pass);
+
+		$this -> loginModel -> checkInput($user , $pass);
+	}
+
+
+	public function showLoginMsg(){
+
+		return  $this -> msg -> showLoginMsg();
+	}
+
+
+	public function usrPressLogin(){
+	
+	if ($this -> loginView -> usrPressLogin()) {
+		# code...
+
+		$this -> getUsrAndPass();
+	}
 		//if () {
 			# code...
-
+		//$this -> loginModel -> isUserLoggedin();
+		 
+		 //	var_dump($this -> loginView -> usrPressLogin());
 
 		//}
 	}
 
-	public function showLoginMsg(){
-		return $this -> msg -> showLoginMsg();
-	}
-
-	
-
-	public function getUsr(){
-		$user = $this -> loginView -> getUsrName();
-//		var_dump($user);
-	}
-
-
-	public function getPass(){
-		$pass = $this -> loginView -> getPassword();
-
-	}
-
+	public function isUserLoggedin(){
+	  
+	 return $this -> loginModel -> isUserLoggedin(); 
+ 	}
 }
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

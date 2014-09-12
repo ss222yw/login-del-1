@@ -6,22 +6,39 @@ require_once("src/controller/login.php");
 
 
  $view = new HTMLView();
-
+$model = new LoginModel();
  $lgc = new loginControll();
 
  $htmlBody = $lgc -> displayLogin();
 
  $lgc -> getUsrInfo();
-
+ // $lgc -> usrPressLogin();
 $showMsg = $lgc -> showLoginMsg();
- //$lgc -> getPass();
+ $lgc -> getUsrAndPass();
+// var_dump($lgc -> isUserLoggedin());
+ //$model -> checkInput($user , $pass);
+if ($lgc -> isUserLoggedin() == true) {
+	# code...
 
-// $lgc -> getUsr();
 
-  
- $view->echoHTML($htmlBody);
- setlocale(LC_ALL, 'swedish');
-    echo ucwords(strftime('%A, den %d %B år %Y. Klockan är [%H:%M:%S].', time()));
- //$view -> echoHTML($showMsg);
+$view -> echoHTML($showMsg);
+
+	
  
+ 
+}
+else
+{
+	$view->echoHTML($htmlBody);
+}
+  
+ 
+
+  //if ($lgc -> isUserLoggedin() == true) {
+  	# code...
+  
+
+ // }
+ setlocale(LC_ALL, 'swedish');
+    echo ucwords(strftime('%Aen. den %d %B år %Y. Klockan är [%H:%M:%S].', time()));
 ?>

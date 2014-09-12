@@ -5,11 +5,11 @@ class loginModel {
 
 private $username;
 private $password;
+private $UserLoggedin = false;
 
 
 public function __construct(){
 	//$this -> getUsrInfo();
-
 }
 
 public function getUsrInfo(){
@@ -27,27 +27,29 @@ public function getUsrInfo(){
 
 	$this -> password = substr($fr, 5);
 
-	//var_dump($this -> username);
-	//var_dump($this -> password);
-
-
-
+//	var_dump($this -> username);
+//	var_dump($this -> password);
 
 }
 
+	public function isUserLoggedin(){
+	return $this -> UserLoggedin;
+ 	}
 
-public function checkInput($user, $pass){
+public function checkInput($user , $pass){
 
-//var_dump($pass);
-//var_dump($user);
+//var_dump($user  == $this -> username);
+	//	var_dump($this -> username);
+ //  var_dump($user);
 	if ($user  == $this -> username && $pass == $this -> password) {
 		# code...
-		//echo "string";
 
-		return true;
+		 $this -> UserLoggedin = true;
 	}
-	return false;
+	//echo "fel";
 }
+
+
 	
 }
 

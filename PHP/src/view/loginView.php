@@ -11,7 +11,7 @@ private $loginModel;
 		<fieldset>
 <legend>Login - Skriv in användarnamn och lösenord</legend>
 <label>Användarnamn : </label> <input type="text" name="name" maxlength="10"/>
-<label>Lösenord : </label><input type="password" name="password" maxlength="10"/>
+<label>Lösenord : </label><input type="password" name="pass" maxlength="10"/>
 <label>Håll mig inloggad : </label><input type="checkbox" name="Auto"/>
 <input type="submit" name="submit" value="Logga in"/> 
 </fieldset>
@@ -39,7 +39,8 @@ if (isset($_POST['submit'])) {
 }
 
 public function usrPressLogin(){
-	return $_POST['submit'];
+	return isset($_POST['submit']);
+	//$_POST['submit'];
 }
 
 public function  usrName(){
@@ -51,7 +52,7 @@ return false;
 }
 
  function passWord(){
-	if (isset($_POST['password']) == true) {
+	if (isset($_POST['pass']) == true) {
 		# code...
 		return true;
 	}
@@ -68,7 +69,7 @@ public function getUsrName(){
  public function getPassword(){
 	if ($this -> passWord() == true) {
 		# code...
-		return $_POST['password'];
+		return $_POST['pass'];
 	}
 }
 
