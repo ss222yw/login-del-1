@@ -23,8 +23,12 @@ $showMsg = $lgc -> showLoginMsg();
 
 // var_dump($lgc -> isUserLoggedin());
  //$model -> checkInput($user , $pass);
+if ($lgc -> isUsrLoggedOut() == true) {
+	# code...
+	$view->echoHTML($htmlBody);
+}
 
-if ($lgc -> isUserLoggedin() == true || $lgc -> isUsrLoggedOut() == false) {
+if ($lgc -> isUserLoggedin() == true ) {
 	# code...
 $view -> echoHTML($showMsg);
 }
