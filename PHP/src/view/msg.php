@@ -7,8 +7,14 @@ class msg{
  
 
  public function showLoginMsg(){
- 		$msgLogin = "<strong>Admin är inloggad</strong>
- 				 <a href='?logout'>logga ut</a>";
+ 		$msgLogin = "
+ 				 <h1>Laboration login del 1</h1>
+ 				 </br>
+ 				 <h2>Admin är inloggad</h2>
+ 				 </br>
+ 				 <a href='?logout'>Logga ut</a>
+ 				 </br>
+ 				 </br>";
  
  return $msgLogin;	
 
@@ -19,10 +25,16 @@ class msg{
  }
 
  public function didUsrPressLogout(){
- 	//if (isset($_GET['logout'])) {
+ 	//var_dump($_GET['logout']);
+ 	if (isset($_GET['logout'])) {
  		# code...
- 	//	return true;
- 	//}
- 	//return false;
+ 		//echo "Du har nu loggat ut";
+ 		//header("Location: index.php");
+//	header("Location:" . $_SERVER["PHP_SELF"]); 
+ 		return true;
+ 		
+ 	}
+ 	return false;
  }
+
 }	

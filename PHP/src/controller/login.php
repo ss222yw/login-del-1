@@ -1,6 +1,7 @@
 <?php
 
-require_once("session.php");
+//namespace controller;
+
 require_once("src/view/loginView.php");
 require_once("src/view/msg.php");
 require_once("src/model/loginModel.php");
@@ -13,13 +14,11 @@ class loginControll{
 	private $loginModel;
 	private $msg;
 
-
 	public function __construct(){
-		$this -> loginModel = new loginModel();
+		$this -> loginModel = new  loginModel();
 		$this -> loginView = new loginView($this -> loginModel);
 		$this -> msg = new msg($this -> loginModel);
-		$this -> showLoginMsg();
-		
+		//$this -> showLoginMsg();
 		//var_dump($this -> showLoginMsg());
 
 
@@ -49,6 +48,7 @@ class loginControll{
 	}
 
 
+
 	public function showLoginMsg(){
 
 		return  $this -> msg -> showLoginMsg();
@@ -59,7 +59,7 @@ class loginControll{
 	
 	if ($this -> loginView -> usrPressLogin()) {
 		# code...
-
+		echo "string";
 		$this -> getUsrAndPass();
 	}
 		//if () {
@@ -71,10 +71,28 @@ class loginControll{
 		//}
 	}
 
+//	public function foo(){
+//		return $this -> loginModel -> isSetSession();
+//	}
+
 	public function isUserLoggedin(){
-	  
+
 	 return $this -> loginModel -> isUserLoggedin(); 
  	}
+
+ 	public function isUsrLoggedOut(){
+ 		if ($this -> msg -> didUsrPressLogout()) {
+ 			# code...
+ 			return $this -> loginModel -> logout();
+ 		}
+ 		return false;
+ 	}
+
+
+ 	//public function isUserLoggedOut(){	
+ 	//	return $this -> msg -> didUsrPressLogout();
+ 		//$this -> msg -> foo();
+ 	//}
 }
 
 ?>
