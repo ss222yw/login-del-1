@@ -58,9 +58,11 @@ public function checkInput($user , $pass){
 }
 
 	public function logout(){
-
-	unset($_SESSION["user"]);
-	header("Location:" . $_SERVER["PHP_SELF"]);
+		//echo "srrrrr";
+			# code...
+			unset($_SESSION["user"]);
+	
+	//header("Location:" . $_SERVER["PHP_SELF"]);
 
 }
 

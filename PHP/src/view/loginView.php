@@ -5,11 +5,11 @@
 class loginView{
 
 private $loginModel;
-
+//private $msg;
 
 public function __construct(loginModel $loginModel){
 
-	$this -> loginModel = $loginModel;	
+	$this -> loginModel = $loginModel;
 	//$this -> messages = new \view\ CookieStorage();
 }
 
@@ -64,6 +64,8 @@ public function getUsrName(){
 	public function showLoginView (){
 		
 				$ret = "";
+		
+		
 		if ($this -> getUsrName() == true && $this -> getPassword() == true) {
 			# code...
 			if ($this -> loginModel -> isUserLoggedin() == false) {
@@ -84,19 +86,10 @@ public function getUsrName(){
 		}
 
 		}
-
-	
-		//if ($this -> loginModel -> logout() == true) {
+		if (isset($_POST['submitlogout']) == true) {
 			# code...
-		//	$logRet .= "Du har loggat ut nu !";
-			//$this -> messages -> save ("Du har loggat ut nu!");
-			//header('Location:' . $_SERVER['PHP_SELF']);
-		//}
-		//else{
-		//	$ret .= $this -> messages -> load();
-		//}
-		//return $ret;
-
+			$ret .="Du har nu loggat ut";
+		}
 		
 
 		
@@ -104,6 +97,7 @@ public function getUsrName(){
 		<fieldset>
 <legend>Login - Skriv in användarnamn och lösenord</legend>
  $ret
+ </br>
 <label>Användarnamn : </label> <input type='text' name='name' maxlength='10'/>
 <label>Lösenord : </label><input type='password' name='pass' maxlength='10'/>
 <label>Håll mig inloggad : </label><input type='checkbox' name='Auto'/>

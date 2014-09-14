@@ -59,7 +59,7 @@ class loginControll{
 	
 	if ($this -> loginView -> usrPressLogin()) {
 		# code...
-		echo "string";
+
 		$this -> getUsrAndPass();
 	}
 	}
@@ -70,12 +70,13 @@ class loginControll{
  	}
 
  	public function isUsrLoggedOut(){
- 		if ($this -> msg -> didUsrPressLogout()) {
+ 	//	var_dump($this -> msg -> UsrPressLogout() == true);
+ 		if ($this -> msg -> UsrPressLogout() == true) {
+ 			//echo "string";
  			# code...
  			 $this -> loginModel -> logout();
- 			 
  		}
- 		return false;
+
  	}
 
 
