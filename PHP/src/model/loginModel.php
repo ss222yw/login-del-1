@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 //namespace model;
 class loginModel {
 
@@ -10,7 +10,7 @@ private $password;
 
 public function __construct(){
 
-	
+	@session_start();
 	$this -> getUsrInfo();
 }
 
@@ -36,11 +36,11 @@ public function getUsrInfo(){
 
 	public function isUserLoggedin(){
 	//return $this -> UserLoggedin;
-		//if (isset($_SESSION['user']) == true) {
+		if (isset($_SESSION['user']) == true) {
 			# code...
-			return isset($_SESSION['user']);
-		//}
-		//return false;
+			return true;
+		}
+		return false;
  	}
 
 public function checkInput($user , $pass){
@@ -60,6 +60,8 @@ public function checkInput($user , $pass){
 	public function logout(){
 
 	unset($_SESSION["user"]);
+	header("Location:" . $_SERVER["PHP_SELF"]);
+
 }
 
 }

@@ -62,18 +62,7 @@ class loginControll{
 		echo "string";
 		$this -> getUsrAndPass();
 	}
-		//if () {
-			# code...
-		//$this -> loginModel -> isUserLoggedin();
-		 
-		 //	var_dump($this -> loginView -> usrPressLogin());
-
-		//}
 	}
-
-//	public function foo(){
-//		return $this -> loginModel -> isSetSession();
-//	}
 
 	public function isUserLoggedin(){
 
@@ -83,16 +72,17 @@ class loginControll{
  	public function isUsrLoggedOut(){
  		if ($this -> msg -> didUsrPressLogout()) {
  			# code...
- 			return $this -> loginModel -> logout();
+ 			 $this -> loginModel -> logout();
+ 			 
  		}
  		return false;
  	}
 
 
- 	//public function isUserLoggedOut(){	
- 	//	return $this -> msg -> didUsrPressLogout();
- 		//$this -> msg -> foo();
- 	//}
+ 	//public function keepMe(){
+ 		//var_dump($this -> loginView -> ifUsrWantToKeepUsrAPass());
+ 	//	return $this -> loginView -> ifUsrWantToKeepUsrAPass();
+ //	}
 }
 
 ?>

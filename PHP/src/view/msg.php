@@ -24,17 +24,18 @@ class msg{
  	$this -> loginModel = $loginModel;	
  }
 
- public function didUsrPressLogout(){
+ public function UsrPressLogout(){
  	//var_dump($_GET['logout']);
- 	if (isset($_GET['logout'])) {
+ 	if (isset($_GET['logout']) == true) {
  		# code...
- 		//echo "Du har nu loggat ut";
- 		//header("Location: index.php");
-//	header("Location:" . $_SERVER["PHP_SELF"]); 
  		return true;
  		
  	}
  	return false;
+ }
+
+ public function didUsrPressLogout(){
+ 	return isset($_GET['logout']);
  }
 
 }	
