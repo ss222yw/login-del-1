@@ -5,7 +5,7 @@
 class loginView{
 
 private $loginModel;
-//private $msg;
+//private $messages;
 
 public function __construct(loginModel $loginModel){
 
@@ -27,7 +27,6 @@ if (isset($_POST['submit']) == true) {
 
 public function usrPressLogin(){
 	return isset($_POST['submit']);
-	//$_POST['submit'];
 }
 
 public function  usrName(){
@@ -60,11 +59,23 @@ public function getUsrName(){
 	}
 }
 
+public function didUsrCheKeepMe(){
+		
+		if (isset($_POST['Auto'])) {
+			# code...
+		return true;
+		}
+		return false;
+	}
+
+	public function usrCheckedit(){
+		return isset($_POST['Auto']);
+	}
+
 
 	public function showLoginView (){
 		
-				$ret = "";
-		
+		$ret = "";
 		
 		if ($this -> getUsrName() == true && $this -> getPassword() == true) {
 			# code...
@@ -79,6 +90,7 @@ public function getUsrName(){
 				if ($this -> usrName() == empty($_POST['name']) ){
 			# code...
 			$ret .= "Användarnamn måste anges!";
+
 		}
 		if ($this -> password() == empty($_POST['pass'])) {
 			# code...
@@ -94,57 +106,46 @@ public function getUsrName(){
 
 		
 		$htmlBody = "<h1>Laboration login del 1</h1><h2>Ej Inloggad</h2><form action='' method='POST' >
-		<fieldset>
-<legend>Login - Skriv in användarnamn och lösenord</legend>
- $ret
- </br>
-<label>Användarnamn : </label> <input type='text' name='name' maxlength='10'/>
-<label>Lösenord : </label><input type='password' name='pass' maxlength='10'/>
-<label>Håll mig inloggad : </label><input type='checkbox' name='Auto'/>
-<input type='submit' name='submit' value='Logga in'/> 
-</fieldset>
-</form>" ;
+					 <fieldset>
+					 <legend>Login - Skriv in användarnamn och lösenord</legend>
+ 					 $ret
+ 					 </br>
+ 					 <label>Användarnamn : </label> <input type='text' name='name' maxlength='10'/>
+					 <label>Lösenord : </label><input type='password' name='pass' maxlength='10'/>
+					 <label>Håll mig inloggad : </label><input type='checkbox' name='Auto'/>
+					 <input type='submit' name='submit' value='Logga in'/> 
+					 </fieldset>
+					 </form>" ;
 
-    return $htmlBody;
-	}
+    				 return $htmlBody;
+		}
 
 
 
-	//public function didUsrCheKeepMe(){
-	//	if (isset($_POST['Auto'])) {
-			# code...
-	//		return true;
-	//	}
-	//	return false;
-	//}
 
-	//public function usrCheckedit(){
-	//	return isset($_POST['Auto']);
-	//}
 
 	
 
 	//public function ifUsrWantToKeepUsrAPass(){
-		//var_dump($this -> usrCheckedit());
-		//var_dump($this -> usrPressLogin());
+	//	var_dump($this -> usrCheckedit());
+	//	var_dump($this -> usrPressLogin());
 	//	if ($this -> usrPressLogin() == true && $this -> usrCheckedit() == true) {
 			# code...
 
 			# code...
-		//	$this -> test ->save("name" , "pass");
-			//setcookie("nam", $_POST['name'] , time() -1);
-			//setcookie("paw", $_POST['pass'] , time() -1);
-
-				//var_dump($_COOKIE);
-	//	}
-	//	else
-	//	{
-			//$ret = $this -> test ->load();
-			//setcookie("nam", "" , time() -1);
-			//setcookie("paw" , "" , time() -1);
-	//	}
-		//return $ret;
-	//}
+	//		$this -> test ->save("name" , "pass");
+	//		setcookie("nam", $_POST['name'] , time() -1);
+//			setcookie("paw", $_POST['pass'] , time() -1);
+//				var_dump($_COOKIE);
+//		}
+//		else
+//		{
+//			$ret = $this -> test ->load();
+//			setcookie("nam", "" , time() -1);
+//			setcookie("paw" , "" , time() -1);
+//		}
+//		return $ret;
+//	}
 
 }
 

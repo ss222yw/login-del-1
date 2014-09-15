@@ -1,7 +1,5 @@
 <?php
 
-//namespace controller;
-
 require_once("src/view/loginView.php");
 require_once("src/view/msg.php");
 require_once("src/model/loginModel.php");
@@ -18,9 +16,6 @@ class loginControll{
 		$this -> loginModel = new  loginModel();
 		$this -> loginView = new loginView($this -> loginModel);
 		$this -> msg = new msg($this -> loginModel);
-		//$this -> showLoginMsg();
-		//var_dump($this -> showLoginMsg());
-
 
 	}
 
@@ -40,10 +35,6 @@ class loginControll{
 		
 		$pass = $this -> loginView -> getPassword();
 		$user = $this -> loginView -> getUsrName();
-
-		//var_dump($user);
-		//var_dump($pass);
-
 		$this -> loginModel -> checkInput($user , $pass);
 	}
 
@@ -70,20 +61,19 @@ class loginControll{
  	}
 
  	public function isUsrLoggedOut(){
- 	//	var_dump($this -> msg -> UsrPressLogout() == true);
+
  		if ($this -> msg -> UsrPressLogout() == true) {
- 			//echo "string";
- 			# code...
+ 		# code...
  			 $this -> loginModel -> logout();
  		}
 
  	}
 
 
- 	//public function keepMe(){
- 		//var_dump($this -> loginView -> ifUsrWantToKeepUsrAPass());
- 	//	return $this -> loginView -> ifUsrWantToKeepUsrAPass();
- //	}
+ 	public function keepMe(){
+ 		var_dump($this -> loginView -> ifUsrWantToKeepUsrAPass());
+ 		return $this -> loginView -> ifUsrWantToKeepUsrAPass();
+ 	}
 }
 
 ?>
