@@ -5,32 +5,27 @@ class loginModel {
 private $username;
 private $password;
 
-
 public function __construct(){
-
 	@session_start();
-	$this -> getUsrInfo();
+	$this -> OpenTextFile();
 }
 
-public function getUsrInfo(){
-
+public function OpenTextFile(){
 
 	$lines = "config.txt";
 
 	$fp = fopen($lines, "r");
-
 	$fr = fread($fp, 13);
 
 	$this -> username = substr($fr, 0,5);
-
 	$this -> password = substr($fr, 5);
 
 }
 
 	public function isUserLoggedin(){
 	
-		if (isset($_SESSION['user']) == true) {
-			# code...
+		if (isset($_SESSION['session']) == true) {
+			
 			return true;
 		}
 		return false;
@@ -39,18 +34,27 @@ public function getUsrInfo(){
 	public function checkInput($user , $pass){
 
 	if ($user  == $this -> username && $pass == $this -> password) {
-		# code...
 
-		$_SESSION['user'] = true;
+		$_SESSION['session'] = true;
 	}
 }
 
 	public function logout(){
-			# code...
-			unset($_SESSION["user"]);
-	
+
+		unset($_SESSION["session"]);	
 }
 
+/*
+	public function getCookUsr(){
+		$user = $this -> username;
+		$ur = ($user);
+	}
+
+	public function getCookPass(){
+			$pass = $this -> password;
+		$pw = md5($pass);
+	}
+	*/
 }
 
 

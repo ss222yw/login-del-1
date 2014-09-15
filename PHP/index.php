@@ -1,35 +1,13 @@
 <?php
 
-require_once("common/HTMLView.php");
-require_once("src/controller/login.php");
+	require_once("common/HTMLView.php");
+	require_once("src/controller/loginController.php");
 
  	$view = new HTMLView();
+ 	$loginControll = new loginControll();
 
-	$model = new LoginModel();
-
- 	$lgc = new loginControll();
-
- 	$htmlBody = $lgc -> displayLogin();
-
-	$showMsg = $lgc -> showLoginMsg();
-
- 	$lgc -> getUsrAndPass();
-
-
-	if ($lgc -> isUsrLoggedOut() == true) {
-	# code...
-	
-		$view->echoHTML($htmlBody);
-	}
-
-	if ($lgc -> isUserLoggedin() == true ) {
-	# code...
-		$view -> echoHTML($showMsg);
-	}
-	else
-	{
-		$view->echoHTML($htmlBody);
-	}
+ 	$htmlBody = $loginControll -> displayLogin();
+	$view->echoHTML($htmlBody);
  
  	setlocale(LC_ALL, 'swedish');
  	$day = utf8_encode(ucfirst(strftime("%A")));
