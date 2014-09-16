@@ -1,5 +1,4 @@
-<?php
-/*
+<?php/*
 namespace view;
 
 class CookieStorage{

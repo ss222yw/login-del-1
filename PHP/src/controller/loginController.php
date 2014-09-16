@@ -16,7 +16,12 @@ class loginControll{
 		$this -> loginModel = new  loginModel();
 		$this -> loginView = new loginView($this -> loginModel);
 		$this -> loggedInView = new loggedInView($this -> loginModel);
-		$this -> getUsrAndPass();
+		$this -> getUsrAndPass();	
+		$this -> keepMe();
+		$this -> DontKeep();
+		//var_dump($_COOKIE);
+		//var_dump($this -> loginView -> foo() == true && $this -> loginView -> fooPass() == true);
+
 	}
 
 		public function getUsrAndPass(){
@@ -51,15 +56,40 @@ class loginControll{
 	}
 
 
-// 	public function keepMe(){
-//		var_dump($this -> loginView -> ifUsrWantToKeepUsrAPass() == true);
- //		if ($this -> loginView -> ifUsrWantToKeepUsrAPass() == true) {
- 			# code...
- 	//		return true;
- 	//	}
- 	//	return false;
- //	}
+ 	public function keepMe(){
+ 		
+ 			
+ 	if ( $this -> loginView -> ifUsrWantToKeepUsrAPass() == true) {
+ 		# code...
+ 		return true;
+ 		 
+ 		 	}
+
  	
-}
+   			return false;
+ 		
+ 	}
+
+ 	public function DontKeep(){
+ 		if ($this -> loginView -> ifUsrDontWantKeepAnyMore() == true) {
+ 			# code...
+ 			return true;
+ 		}
+ 		return false;
+ 	}
+
+ 
+ 	public function fooTest(){
+
+ 		if ($this -> loginView -> foo() == true && $this -> loginView -> fooPass() == true ) {
+ 			# code...
+ 			return true;
+ 		}
+ 		if ($this -> loginView -> foo() == false || $this -> loginView -> fooPass() == false) {
+ 			# code...
+ 		 	return false;
+ 		}
+ 	}
+ 	}
 
 ?>

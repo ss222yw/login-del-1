@@ -8,6 +8,8 @@
 
  	$htmlBody = $loginControll -> displayLogin();
 	$view->echoHTML($htmlBody);
+
+	
  
  	setlocale(LC_ALL, 'swedish');
  	$day = utf8_encode(ucfirst(strftime("%A")));

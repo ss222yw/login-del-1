@@ -44,18 +44,15 @@ public function OpenTextFile(){
 		unset($_SESSION["session"]);	
 }
 
-/*
 	public function getCookUsr(){
-		$user = $this -> username;
-		$ur = ($user);
+		return $this -> username;
 	}
 
 	public function getCookPass(){
-			$pass = $this -> password;
-		$pw = md5($pass);
+		return	 md5($this -> password);
 	}
-	*/
-}
+
+	}
 
 
 ?>

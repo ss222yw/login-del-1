@@ -3,17 +3,18 @@
 class loginView{
 
 private $loginModel;
-private $CookieStorage;
 	
 
 public function __construct(loginModel $loginModel){
 
 	$this -> loginModel = $loginModel;
 
+
+	//var_dump($this -> fooPass());
 }
 
 public function SubmitLogin(){
-if (isset($_POST['submit']) == true) {
+if (isset($_POST['submitLogin']) == true) {
 
 	return true;	
 }
@@ -119,30 +120,63 @@ public function getUserName(){
 
 
 	
-/*
+
 	public function ifUsrWantToKeepUsrAPass(){
-			
-			if (isset($_POST['submit']) == true) {
+		$usernameCookie = $this -> loginModel -> getCookUsr();
+		$passwordCookie = $this -> loginModel -> getCookPass();
+			//var_dump($_COOKIE);
+			//var_dump(isset($_POST['submitLogin']) == true);
+			//var_dump(isset($_POST['KeepMe']) == true);
+		
+			if (isset($_POST['submitLogin']) == true && isset($_POST['KeepMe']) == true) {
 			# code...
-			if (isset($_POST['KeepMe']) == true) {
-			# code...
-			setcookie("nam", $_POST['name'] , - 1);
-			setcookie("paw", $_POST['pass'] , - 1);
+		  setcookie("user", $usernameCookie, time()+60*60*24);
+		  setcookie("pass", $passwordCookie, time()+60*60*24);
 
 		//header('Location: ' . $_SERVER['PHP_SELF']);
-				
+				return true;
 			}
+			return false;
+
+	
+		
+	
 		}
+		public function ifUsrDontWantKeepAnyMore(){
 		if (isset($_POST['submitlogout']) == true) {
 			# code...
-			setcookie("nam", "" , time() -1);
-			setcookie("paw" , "" , time() -1);
+		setcookie("user", "" , time() -1);
+		setcookie("pass" , "" , time() -1);
+		return true;
 		}
-		
-		
+		return false;
 		}
-*/
 
+
+
+		public function foo(){
+				# code...
+			if (isset($_COOKIE['user'])) {
+				# code...
+				$CookieStorage = $_COOKIE['user'];
+				return $CookieStorage;
+			}
+		return false;
+
+						
+		}
+
+		public function fooPass(){
+				# code...
+			if (isset($_COOKIE['pass'])) {
+							# code...
+				$CookieStoragePass = $_COOKIE['pass'];
+				return $CookieStoragePass;
+			}
+		return false;
+		
+		}
+		
 }
 
 ?>
