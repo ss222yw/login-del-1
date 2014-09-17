@@ -49,7 +49,7 @@ public function OpenTextFile(){
 	}
 
 	public function getCookPass(){
-		return	 md5($this -> password);
+		return	 $this -> password;
 	}
 
 	}

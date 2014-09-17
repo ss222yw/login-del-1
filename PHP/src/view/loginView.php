@@ -106,8 +106,8 @@ public function getUserName(){
 					 <legend>Login - Skriv in användarnamn och lösenord</legend>
  					 $ret
  					 </br>
- 					 <label>Användarnamn : </label> <input type='text' name='username' maxlength='10' value='".$this -> getUserName()."'/>
-					 <label>Lösenord : </label><input type='password' name='password' maxlength='10'/>
+ 					 <label>Användarnamn : </label> <input type='text' name='username' maxlength='30' value='".$this -> getUserName()."'/>
+					 <label>Lösenord : </label><input type='password' name='password' maxlength='30'/>
 					 <label>Håll mig inloggad : </label><input type='checkbox' name='KeepMe'/>
 					 <input type='submit' name='submitLogin' value='Logga in'/> 
 					 </fieldset>
@@ -124,17 +124,26 @@ public function getUserName(){
 	public function ifUsrWantToKeepUsrAPass(){
 		$usernameCookie = $this -> loginModel -> getCookUsr();
 		$passwordCookie = $this -> loginModel -> getCookPass();
+		$InputUserName = $this -> getUserName();
+		$InputPassword = $this -> getPassword();
+		$HidePassword = md5($passwordCookie);
+		
 			//var_dump($_COOKIE);
 			//var_dump(isset($_POST['submitLogin']) == true);
-			//var_dump(isset($_POST['KeepMe']) == true);
+		//	var_dump($InputUserName == $usernameCookie && $InputPassword == $passwordCookie);
 		
-			if (isset($_POST['submitLogin']) == true && isset($_POST['KeepMe']) == true) {
+			if ($InputUserName == $usernameCookie && $InputPassword == $passwordCookie) {
 			# code...
-		  setcookie("user", $usernameCookie, time()+60*60*24);
-		  setcookie("pass", $passwordCookie, time()+60*60*24);
+				if (isset($_POST['submitLogin']) == true && isset($_POST['KeepMe']) == true ) {
+					# code...
+					  setcookie('loginView::user', $usernameCookie, time()+60);
+		 			  setcookie('loginView::pass', $HidePassword, time()+60);
+		  return true;
+				}
+		
 
-		//header('Location: ' . $_SERVER['PHP_SELF']);
-				return true;
+		
+				
 			}
 			return false;
 
@@ -143,35 +152,35 @@ public function getUserName(){
 	
 		}
 		public function ifUsrDontWantKeepAnyMore(){
-		if (isset($_POST['submitlogout']) == true) {
+			if ($this -> issetCookieUsername() == true && $this -> issetCookiePassword() == true) {
+				# code...
+					if (isset($_POST['submitlogout']) == true) {
 			# code...
-		setcookie("user", "" , time() -1);
-		setcookie("pass" , "" , time() -1);
+		setcookie('loginView::user', "" , time() -1);
+		setcookie('loginView::pass' , "" , time() -1);
 		return true;
 		}
-		return false;
-		}
+			}
+			}
 
 
 
-		public function foo(){
+		public function issetCookieUsername(){
 				# code...
-			if (isset($_COOKIE['user'])) {
+			if (isset($_COOKIE['loginView::user'])) {
 				# code...
-				$CookieStorage = $_COOKIE['user'];
-				return $CookieStorage;
+				return true;
 			}
 		return false;
 
 						
 		}
 
-		public function fooPass(){
+		public function issetCookiePassword(){
 				# code...
-			if (isset($_COOKIE['pass'])) {
+			if (isset($_COOKIE['loginView::pass'])) {
 							# code...
-				$CookieStoragePass = $_COOKIE['pass'];
-				return $CookieStoragePass;
+				return true;
 			}
 		return false;
 		
