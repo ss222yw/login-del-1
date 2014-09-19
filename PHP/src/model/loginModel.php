@@ -51,7 +51,7 @@ class loginModel {
 
 
 	public function OpenTextFileToRead(){
-		if ($this->emptyPasswordFile() > 0) {
+		if ($this->IfEmptyPasswordFile() > 0) {
 			$linesWrite = "Cookie.txt";
 			$fo = fopen($linesWrite, "r");
 			$fr = fread($fo, filesize($linesWrite));
@@ -65,7 +65,7 @@ class loginModel {
 
 
 	public function OpenTextFileToReadDate(){
-		if ($this->emptyDateFile() > 0) {
+		if ($this->IfEmptyDateFile() > 0) {
 			$lineWriteCookieTime = "CookieTime.txt";
 			$fp = fopen($lineWriteCookieTime, "r");
 			$fr = fread($fp, filesize($lineWriteCookieTime));
@@ -78,7 +78,7 @@ class loginModel {
 
 
 
-	public function emptyPasswordFile(){
+	public function IfEmptyPasswordFile(){
 		$checkPasswordFile = @file("Cookie.txt");
 		if ($checkPasswordFile === false) {
 			return 0;
@@ -89,7 +89,7 @@ class loginModel {
 
 
 
-	public function emptyDateFile(){
+	public function IfEmptyDateFile(){
 		$checkDateFile = @file("CookieTime.txt");
 		if ($checkDateFile == false) {
 			return 0;
@@ -97,9 +97,6 @@ class loginModel {
 		return count($checkDateFile);
 	}
 
-	//public function SessionForCookies(){	
-	//	 $_SESSION['session'] = true;
-	//}
 
 
 
@@ -129,9 +126,10 @@ class loginModel {
 
 	public function checkInput($user , $pass , $userCookie, $passCookie){
 		$this->cryptPass = $passCookie;
-		if ($user  == $this->username && $pass == $this->password 
+		if (($user == $this->username && $pass == $this->password) == true
 			|| $passCookie == $this->PasswordCookieFromFile && $userCookie == $this->username) {
-				return $_SESSION['session'] = true;
+				 $_SESSION['session'] = true;
+				return true;
 		}
 		return false;
 	}
@@ -141,6 +139,18 @@ class loginModel {
 
 	public function logout(){
 		unset($_SESSION['session']);	
+	}
+
+
+
+	public function foo(){
+		$this->cryptPass;
+	}
+
+
+
+	public function footwo(){
+		$this->PasswordCookieFromFile;
 	}
 
 }

@@ -16,15 +16,14 @@ class logOutView{
  	
 
  		if ($this->loginView->usrCheckedit() == true 
- 			&& $this->loginView->usrPressLogin() == true 
+ 			&& $this->loginView->submitLogin() == true 
  			&& $this->loginModel->isUserLoggedin() == true) {
  			$ret .= "Inloggning lyckades och vi kommer ihåg dig nästa gång";
 	 	}
 
- 		if ($this->loginView->keepMeInMind() == true 
+ 		if ($this->loginView->IsSetCookies() == true 
  			 && $loggedIn == true) {
  			$ret .= "Inloggning lyckades via cookies";
-
  		}
  		
  		$LoggedInForm = "

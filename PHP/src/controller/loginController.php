@@ -60,32 +60,32 @@ class loginControll{
 
 
 		public function displayLogin(){
+			$this->isUsrLoggedOut();
+
 			if ($this->loginView->ifUsrDontWantKeepAnyMore() == true) {
-					return $this->loginView->showLoginView();
-				}
-
-				$this->isUsrLoggedOut();
-
-
-
-
-			if ($this->loginView->usrPressLogin() == true 
-				|| $this->loginView->keepMeInMind() == true) {
-
-					if ($this->didLoginThisRequest() == true) {
-						$this->loggedIn = true;
-				}					
+				   return $this->loginView->showLoginView($this->loggedIn);
 			}
-			
 
+			if ($this->loginView->submitLogin() == true 
+				&& $this->loginModel->isUserLoggedin() == true	
+						|| $this->loginView->IsSetCookies() == true
+						 && $this->loginModel->isUserLoggedin() == true) {
 
+					$this->loggedIn;
+						
+			}
+			else
+			{
+					$this->loggedIn = $this->didLoginThisRequest();
+			}
+				
 					
 			if ($this->loginModel->isUserLoggedin() == true) {
 				return  $this->logOutView->showlogOutView($this->loggedIn);
 			}
 			else
 			{
-				return $this->loginView->showLoginView();
+				return $this->loginView->showLoginView($this->loggedIn);
 			}	
 		}
 

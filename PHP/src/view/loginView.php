@@ -6,11 +6,12 @@ class loginView{
 
 	public function __construct(loginModel $loginModel){
 		$this->loginModel = $loginModel;
+
 	} 
 
 
 
-	public function SubmitLogin(){
+	private function pressLogIn(){
 		if (isset($_POST['submitLogin']) == true) {
 			return true;	
 		}
@@ -19,13 +20,13 @@ class loginView{
 
 
 
-	public function usrPressLogin(){
+	public function submitLogin(){
 		return isset($_POST['submitLogin']);
 	}
 
 
 
-	public function  userName(){
+	private function  userName(){
 		if (isset($_POST['username']) == true) {
 			return true;
 		}
@@ -34,7 +35,7 @@ class loginView{
 
 
 
-	 function password(){
+	private function password(){
 		if (isset($_POST['password']) == true) {
 			return true;
 		}
@@ -57,7 +58,7 @@ class loginView{
 	}
 
 
-  	public function didUsrCheKeepMe(){
+  	private function didUsrCheKeepMe(){
 		if (isset($_POST['KeepMe'])) {
 			return true; 
 		}
@@ -72,7 +73,7 @@ class loginView{
 
 
 
-	public function showLoginView (){	
+	public function showLoginView ($loggedIn){	
 		$ret = "";	
 		if ($this->getUserName() == true && $this->getPassword() == true) {
 			if ($this->loginModel->isUserLoggedin() == false) {
@@ -80,7 +81,7 @@ class loginView{
 			}
 		}
 
-		if ( $this->usrPressLogin() == true) {
+		if ( $this->submitLogin() == true) {
 	     	if ($this->userName() == empty($_POST['username']) ){
 				$ret .= "Användarnamn måste anges!";
 			}
@@ -93,7 +94,15 @@ class loginView{
 		if (isset($_POST['submitlogout']) == true) {
 			$ret .="Du har nu loggat ut";
 		}
+		else{
+				if ($this->IsSetCookies() == true && $loggedIn == false) {
+				$ret .= "Fel cookie information";
+			}
+		}
 		
+	
+
+
 		$htmlBody = "<h1>Laboration login del 1</h1><h2>Ej Inloggad</h2><form action='' method='POST' >
 					 <fieldset>
 					 <legend>Login - Skriv in användarnamn och lösenord</legend>
@@ -130,6 +139,7 @@ class loginView{
 			if (isset($_POST['submitlogout']) == true) {
 				setcookie('loginView::user', "" , time() -1);
 				setcookie('loginView::pass' , "" , time() -1);
+				unset($_SESSION['session']);
 				return true;
 				}
 				return false;
@@ -159,7 +169,7 @@ class loginView{
 
 
 
-	public function keepMeInMind(){
+	public function IsSetCookies(){
 		if ($this->issetCookiePassword() == true 
 			&& $this->issetCookieUsername() == true) {
 				return true;
