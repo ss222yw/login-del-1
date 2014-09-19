@@ -6,7 +6,7 @@
  	$view = new HTMLView();
  	$loginControll = new loginControll();
 
- 	$htmlBody = $loginControll -> displayLogin();
+ 	$htmlBody = $loginControll->displayLogin();
 	$view->echoHTML($htmlBody);
 
 	
