@@ -6,8 +6,6 @@ class loginModel {
 	private $password;
 	private $PasswordCookieFromFile;
 	private $DateCookieFromFile;
-	private $cryptPass;
-	private $CoTime;
 
 
 
@@ -15,7 +13,6 @@ class loginModel {
 	public function __construct(){
 		@session_start();
 		$this->OpenTextFile();
-		$this->OpenTextFileToWrite();
 		$this->OpenTextFileToRead();
 		$this->OpenTextFileToReadDate();
 	}
@@ -34,16 +31,15 @@ class loginModel {
 
 
 
-	public function OpenTextFileToWrite(){
+	public function OpenTextFileToWrite($cryptPass , $CookieTimeNow){
 		$linesWrite = "Cookie.txt";
-		$lineWriteCookieTime = "CookieTime.txt";
-		$this->cryptPass = $this->getCryptPassword();
-		$this->CoTime = $this->getCookieTime();
 		$fo = fopen($linesWrite, "w");
-		$fopen = fopen($lineWriteCookieTime, "w");
-		$fw = fwrite($fo, $this->cryptPass);
-		$fwt = fwrite($fopen, $this->CoTime);
+		$fw = fwrite($fo, $cryptPass);
 		fclose($fo);
+
+		$lineWriteCookieTime = "CookieTime.txt";
+		$fopen = fopen($lineWriteCookieTime, "w");
+		$fwt = fwrite($fopen, $CookieTimeNow);
 		fclose($fopen);
 	}
 
@@ -108,28 +104,15 @@ class loginModel {
  	}
 
 
+	public function checkInput($user , $pass , $userCookie, $passCookie , $CookieTimeNow){
 
-
- 	public function getCryptPassword(){
- 		return	$passCookie = crypt(md5($this->cryptPass));	
- 	}
-
-
-
-
- 	public function getCookieTime(){
- 		return $CookieTime = time()+60*60;
- 	}
- 	
-
-
-
-	public function checkInput($user , $pass , $userCookie, $passCookie){
-		$this->cryptPass = $passCookie;
 		if (($user == $this->username && $pass == $this->password) == true
-			|| $passCookie == $this->PasswordCookieFromFile && $userCookie == $this->username) {
+						|| $passCookie == $this->PasswordCookieFromFile && 
+										 $userCookie == $this->username &&
+							$CookieTimeNow < (int)$this->DateCookieFromFile ){
+
 				 $_SESSION['session'] = true;
-				return true;
+				 return true;
 		}
 		return false;
 	}
@@ -139,18 +122,6 @@ class loginModel {
 
 	public function logout(){
 		unset($_SESSION['session']);	
-	}
-
-
-
-	public function foo(){
-		$this->cryptPass;
-	}
-
-
-
-	public function footwo(){
-		$this->PasswordCookieFromFile;
 	}
 
 }

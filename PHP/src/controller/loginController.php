@@ -25,11 +25,13 @@ class loginControll{
 
 
 		private function getUsrAndPass(){
+
 			$pass = $this->loginView->getPassword();
 			$user = $this->loginView->getUserName();
-			$userCookie = $this->loginView->issetCookieUsername();
- 			$passCookie = $this->loginView->issetCookiePassword();
-			return $this->loginModel-> checkInput($user , $pass, $userCookie, $passCookie);
+			$userCookie = $this->loginView->getCookieUsername();
+ 			$passCookie = $this->loginView->getCookiePassword();
+ 			$CookieTimeNow = time();
+			return $this->loginModel-> checkInput($user , $pass, $userCookie, $passCookie , $CookieTimeNow);
 		}
 
 
@@ -45,9 +47,7 @@ class loginControll{
 
 
  		public function didLoginThisRequest(){
- 			
 			if ($this->getUsrAndPass() == true) {
-							
 				if ($this->loginView->usrCheckedit() == true) {
 						$this->loginView->ifUsrWantToKeepUsrAPass();
 					}
@@ -61,7 +61,6 @@ class loginControll{
 
 		public function displayLogin(){
 			$this->isUsrLoggedOut();
-
 			if ($this->loginView->ifUsrDontWantKeepAnyMore() == true) {
 				   return $this->loginView->showLoginView($this->loggedIn);
 			}
@@ -78,7 +77,7 @@ class loginControll{
 			{
 					$this->loggedIn = $this->didLoginThisRequest();
 			}
-				
+
 					
 			if ($this->loginModel->isUserLoggedin() == true) {
 				return  $this->logOutView->showlogOutView($this->loggedIn);

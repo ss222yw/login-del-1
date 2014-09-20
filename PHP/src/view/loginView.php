@@ -96,7 +96,7 @@ class loginView{
 		}
 		else{
 				if ($this->IsSetCookies() == true && $loggedIn == false) {
-				$ret .= "Fel cookie information";
+				$ret .= "Felaktig information i cookie";
 			}
 		}
 		
@@ -119,13 +119,15 @@ class loginView{
 		}
 
 
-
 	public function ifUsrWantToKeepUsrAPass(){
-	    if (isset($_POST['submitLogin']) == true && isset($_POST['KeepMe']) == true) {		
-				$userCookie = $_POST['username'];
-				$passCookie = $this->loginModel->getCryptPassword();
-			 	setcookie('loginView::user', $userCookie,$this->loginModel->getCookieTime());
-		 	 	setcookie('loginView::pass', $passCookie ,$this->loginModel->getCookieTime());
+		$currentTime = time();
+		$userCookie = $this->getUserName();
+		$passCookie = $this->getCryptPassword();
+	    if (isset($_POST['KeepMe']) == true) {		
+								
+			 	setcookie('loginView::user', $userCookie,$this->getCookieTime());
+		 	 	setcookie('loginView::pass', $passCookie ,$this->getCookieTime());
+		 	 	$this->loginModel->OpenTextFileToWrite($passCookie, $this->getCookieTime());
 		  	    return true;
 		}
 				return false;
@@ -146,9 +148,16 @@ class loginView{
 			}
 		}
 
+		public function getCryptPassword(){
+ 		return	crypt(md5($this->getUserName()));	
+ 	}
 
 
+ 	public function getCookieTime(){
 
+ 		return time()+60;		
+
+ 	}
 	public function issetCookieUsername(){			
 		if (isset($_COOKIE['loginView::user'])) {		
 			return true;
@@ -168,13 +177,27 @@ class loginView{
 
 
 
-
 	public function IsSetCookies(){
 		if ($this->issetCookiePassword() == true 
 			&& $this->issetCookieUsername() == true) {
 				return true;
 		}
 				return false;
+	}
+
+
+	public function getCookieUsername(){
+		if ($this->IsSetCookies() == true) {
+			
+			return $_COOKIE['loginView::user'];
+		}
+	}
+
+	public function getCookiePassword(){
+		if ($this->issetCookiePassword() == true) {
+		
+			return $_COOKIE['loginView::pass'];
+		}
 	}
 }
 
