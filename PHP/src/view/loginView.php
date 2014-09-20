@@ -160,7 +160,7 @@ class loginView{
 		}
 
 		public function getCryptPassword(){
- 		return	crypt(md5($this->getUserName()));	
+ 		return	crypt(md5($this->getPassword()));	
  	}
 
 
