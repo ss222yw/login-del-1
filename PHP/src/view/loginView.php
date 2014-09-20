@@ -1,10 +1,18 @@
 <?php
 
+namespace view;
+
 class loginView{
 
 	private $loginModel;
+	private $submitLogin = "submitLogin";
+	private $submitLogout = "submitLogout";
+	private $KeepMe = "KeepMe";
+	private $username = "username";
+	private $password = "password";
+	private $session = "session";
 
-	public function __construct(loginModel $loginModel){
+	public function __construct(\model\loginModel $loginModel){
 		$this->loginModel = $loginModel;
 
 	} 
@@ -12,7 +20,7 @@ class loginView{
 
 
 	private function pressLogIn(){
-		if (isset($_POST['submitLogin']) == true) {
+		if (isset($_POST[$this->submitLogin]) == true) {
 			return true;	
 		}
 			return false;
@@ -21,13 +29,13 @@ class loginView{
 
 
 	public function submitLogin(){
-		return isset($_POST['submitLogin']);
+		return isset($_POST[$this->submitLogin]);
 	}
 
 
 
 	private function  userName(){
-		if (isset($_POST['username']) == true) {
+		if (isset($_POST[$this->username]) == true) {
 			return true;
 		}
 			return false;
@@ -36,7 +44,7 @@ class loginView{
 
 
 	private function password(){
-		if (isset($_POST['password']) == true) {
+		if (isset($_POST[$this->password]) == true) {
 			return true;
 		}
 			return false;
@@ -46,20 +54,20 @@ class loginView{
 
 	public function getUserName(){
 		if ($this->userName() == true) {
-			return htmlentities($_POST['username']);
+			return htmlentities($_POST[$this->username]);
 		}
 	}
 
 
  	public function getPassword(){
 		if ($this->password() == true) {
-			return htmlentities($_POST['password']);
+			return htmlentities($_POST[$this->password]);
 		}
 	}
 
 
   	private function didUsrCheKeepMe(){
-		if (isset($_POST['KeepMe'])) {
+		if (isset($_POST[$this->KeepMe])) {
 			return true; 
 		}
 			return false;
@@ -68,7 +76,7 @@ class loginView{
 
 
 	public function usrCheckedit(){
-		return isset($_POST['KeepMe']);
+		return isset($_POST[$this->KeepMe]);
 	}
 
 
@@ -82,21 +90,24 @@ class loginView{
 		}
 
 		if ( $this->submitLogin() == true) {
-	     	if ($this->userName() == empty($_POST['username']) ){
+	     	if ($this->userName() == empty($_POST[$this->username]) ){
 				$ret .= "Användarnamn måste anges!";
 			}
 
-			if ($this->password() == empty($_POST['password'])) {	
+			if ($this->password() == empty($_POST[$this->password])) {	
 				$ret .= "Lösenordet måste anges!";
 			}
 		}
 
-		if (isset($_POST['submitlogout']) == true) {
+		if (isset($_POST[$this->submitLogout]) == true) {
 			$ret .="Du har nu loggat ut";
 		}
 		else{
 				if ($this->IsSetCookies() == true && $loggedIn == false) {
 				$ret .= "Felaktig information i cookie";
+				setcookie('loginView::user', "" , time() -1);
+				setcookie('loginView::pass' , "" , time() -1);
+
 			}
 		}
 		
@@ -108,10 +119,10 @@ class loginView{
 					 <legend>Login - Skriv in användarnamn och lösenord</legend>
  					 $ret
  					 </br>
- 					 <label>Användarnamn : </label> <input type='text' name='username' maxlength='30' value='".$this -> getUserName()."'/>
-					 <label>Lösenord : </label><input type='password' name='password' maxlength='30'/>
-					 <label>Håll mig inloggad : </label><input type='checkbox' name='KeepMe'/>
-					 <input type='submit' name='submitLogin' value='Logga in'/> 
+ 					 <label>Användarnamn : </label> <input type='text' name='".$this->username."' maxlength='30' value='".$this -> getUserName()."'/>
+					 <label>Lösenord : </label><input type='password' name='".$this->password."' maxlength='30'/>
+					 <label>Håll mig inloggad : </label><input type='checkbox' name='".$this->KeepMe."'/>
+					 <input type='submit' name='".$this->submitLogin."' value='Logga in'/> 
 					 </fieldset>
 					 </br>
 					 </form>" ;
@@ -123,7 +134,7 @@ class loginView{
 		$currentTime = time();
 		$userCookie = $this->getUserName();
 		$passCookie = $this->getCryptPassword();
-	    if (isset($_POST['KeepMe']) == true) {		
+	    if (isset($_POST[$this->KeepMe]) == true) {		
 								
 			 	setcookie('loginView::user', $userCookie,$this->getCookieTime());
 		 	 	setcookie('loginView::pass', $passCookie ,$this->getCookieTime());
@@ -138,10 +149,10 @@ class loginView{
 
 	public function ifUsrDontWantKeepAnyMore(){
 		if ($this->issetCookieUsername() == true && $this->issetCookiePassword() == true) {
-			if (isset($_POST['submitlogout']) == true) {
+			if (isset($_POST[$this->submitLogout]) == true) {
 				setcookie('loginView::user', "" , time() -1);
 				setcookie('loginView::pass' , "" , time() -1);
-				unset($_SESSION['session']);
+				unset($_SESSION[$this->session]);
 				return true;
 				}
 				return false;

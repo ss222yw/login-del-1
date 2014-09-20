@@ -1,4 +1,6 @@
 <?php
+	
+	namespace controller;
 
    	require_once("src/view/loginView.php");
 	require_once("src/view/logOutView.php");
@@ -16,9 +18,9 @@ class loginControll{
 
 
 		public function __construct(){
-			$this->loginModel = new  loginModel();
-			$this->loginView = new loginView($this->loginModel);
-			$this->logOutView = new logOutView($this->loginModel);
+			$this->loginModel = new \model\loginModel();
+			$this->loginView = new \view\loginView($this->loginModel);
+			$this->logOutView = new \view\logOutView($this->loginModel);
 		}
 
 

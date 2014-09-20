@@ -1,10 +1,12 @@
 <?php
 
+namespace view;	
+
 class logOutView{
 
  	private $loginModel;
  	private $loginView;
- 
+ 	private $submitLogout = "submitLogout";
 
  	public function ShowlogOutView($loggedIn){
  		$ret ="";
@@ -33,7 +35,7 @@ class logOutView{
  				 $ret
  				 </br>
  				 </br>
- 				 <input type='submit' name='submitlogout' value='Logga ut'/>
+ 				 <input type='submit' name='".$this->submitLogout."' value='Logga ut'/>
  				 </br>
  				 </br>
  				 </form>";
@@ -43,16 +45,16 @@ class logOutView{
 
 
 
- 	public function __construct(loginModel $loginModel){
+ 	public function __construct(\model\loginModel $loginModel){
  		$this->loginModel = $loginModel;	
- 		$this->loginView = new loginView($this->loginModel);
+ 		$this->loginView = new \view\loginView($this->loginModel);
  	}
 
 
 
 
  	public function SubmitLogout(){ 	
-	 	if (isset($_POST['submitlogout']) == true) {
+	 	if (isset($_POST[$this->submitLogout]) == true) {
 
  			return true;
  		}
