@@ -21,6 +21,12 @@ class loginModel {
 		$this->OpenTextFileToReadDate();
 	}
 
+	public function compareWeb($isVaild){
+		if ($isVaild ==  $_SESSION[$this->session]) {
+			return true;
+		}
+		return false;
+	}
 
 
 
@@ -108,14 +114,14 @@ class loginModel {
  	}
 
 
-	public function checkInput($user , $pass , $userCookie, $passCookie , $CookieTimeNow){
+	public function checkInput($user , $pass , $userCookie, $passCookie , $CookieTimeNow , $web){
 
 		if (($user == $this->username && $pass == $this->password) == true
 						|| $passCookie == $this->PasswordCookieFromFile && 
 										 $userCookie == $this->username &&
 							$CookieTimeNow < (int)$this->DateCookieFromFile ){
 
-				 $_SESSION[$this->session] = true;
+				 $_SESSION[$this->session] = $web;
 				 return true;
 		}
 		return false;

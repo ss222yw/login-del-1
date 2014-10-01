@@ -3,7 +3,7 @@
 namespace view;
 
 class loginView{
-
+	
 	private $loginModel;
 	private $submitLogin = "submitLogin";
 	private $submitLogout = "submitLogout";
@@ -11,12 +11,20 @@ class loginView{
 	private $username = "username";
 	private $password = "password";
 	private $session = "session";
+	private $brows;
+	private $ip;
 
 	public function __construct(\model\loginModel $loginModel){
 		$this->loginModel = $loginModel;
-
+		//var_dump($_SERVER); die();
+		$this->brows = $_SERVER["HTTP_USER_AGENT"];
+		$this->ip = $_SERVER["REMOTE_ADDR"];
+		//var_dump($this->getWebBrowserAndIpAdress());
 	} 
 
+	public function getWebBrowserAndIpAdress(){
+		return $this->brows.$this->ip;
+	}
 
 
 	private function pressLogIn(){

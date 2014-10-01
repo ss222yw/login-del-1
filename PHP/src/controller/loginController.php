@@ -23,7 +23,9 @@ class loginControll{
 			$this->logOutView = new \view\logOutView($this->loginModel);
 		}
 
-
+		public function getWebSiteAndIpAdress(){
+ 			return $this->loginView->getWebBrowserAndIpAdress();
+ 		}	
 
 
 		private function getUsrAndPass(){
@@ -31,9 +33,10 @@ class loginControll{
 			$pass = $this->loginView->getPassword();
 			$user = $this->loginView->getUserName();
 			$userCookie = $this->loginView->getCookieUsername();
- 			$passCookie = $this->loginView->getCookiePassword();
+ 			$passCookie = $this->loginView->getCookiePassword();	
  			$CookieTimeNow = time();
-			return $this->loginModel-> checkInput($user , $pass, $userCookie, $passCookie , $CookieTimeNow);
+ 			$web = $this->getWebSiteAndIpAdress();
+			return $this->loginModel-> checkInput($user , $pass, $userCookie, $passCookie , $CookieTimeNow , $web);
 		}
 
 
@@ -81,7 +84,7 @@ class loginControll{
 			}
 
 					
-			if ($this->loginModel->isUserLoggedin() == true) {
+			if ($this->loginModel->isUserLoggedin() == true && $this->loginModel->compareWeb($this->getWebSiteAndIpAdress()) == true) {
 				return  $this->logOutView->showlogOutView($this->loggedIn);
 			}
 			else
